@@ -1,7 +1,6 @@
 import React from "react";
 //import Font from "../Screencomp/Foot";
 import HeaderTable from "../Screencomp/Header";
-
 import Section from "../Screencomp/Homecomp/Section";
 import "../css/Header.css";
 import Working from "../Screencomp/Homecomp/Working";

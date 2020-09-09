@@ -36,7 +36,7 @@ export const BtnGroup = () => {
   )
 }
 
-export const DriverDetailsBtnGroup = () => {
+export const DriverDetailsBtnGroup = ({ driver }) => {
   return (
     <div className="d-flex justify-content-start">
       <Link
@@ -46,13 +46,13 @@ export const DriverDetailsBtnGroup = () => {
       >
         Granted
       </Link>
-      <Link
-        to="/driverdetails/aboutdriver" style={{width: "16%"}}
+      {driver ? <Link
+        to="/driverdetails/aboutdriver" style={{ width: "16%" }}
         className="bg-secondary text-center text-light mr-1 btn-sm"
         style={{ width: '16%', borderRadius: '0' }}
       >
-        About Driver 
-      </Link>     
+        About Driver
+      </Link> : null}
     </div>
   )
 }

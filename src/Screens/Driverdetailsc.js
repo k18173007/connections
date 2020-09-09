@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
 import { DriverDetailsBtnGroup } from './RadioBtn'
 import map from "../assests/maps.jpg";
 import DrivingCard from "../assests/Driving.jpg";
 import ProfilePic from "../assests/Profileinside.png"
 import "../css/Header.css";
-// import { HospitalDetails } from "./Details";
+import { HospitalDetails } from "./Details";
 import { DriverDetailsTable, GrantedTable, DriverDetails } from "./DriverDetailsTable";
 import { connect } from 'react-redux';
 
@@ -21,9 +21,6 @@ const mapStateToProps = state => {
         hospitals: state.hospitals
     }
 }
-
-
-
 
 const f = {
     fontSize: "25px",
@@ -52,16 +49,17 @@ function Foot() {
 
 
 const DriverTable = (props) => {
-    let arr = ["Patients", "Hospitals", "Drivers"]
 
+    const [driver, setDriver] = useState(null);
+    const [data, setData] = useState(null);
     const AboutDriver = () => {
         return (
-            <div className="container d-flex p-0">
+            <div className="container d-flex p-0 align-items-center">
                 <div className="col-4 col-md-4 col-sm p-0">
                     <img style={{ width: "240px", height: "180px" }} src={DrivingCard} alt="card" />
                 </div>
                 <div className="col-6 col-md-6 col-sm">
-                    <DriverDetails />
+                    <DriverDetails driver={driver} />
                 </div>
                 <div className="col-2 col-md-2 col-sm p-0 d-flex justify-content-end">
                     <img style={{ width: "100px", height: "100px" }} src={ProfilePic} alt="profile pic" />
@@ -69,21 +67,16 @@ const DriverTable = (props) => {
             </div>
         )
     }
-    const items = []
+
     const DetailTable = () => {
-
-
-
-
         return (
-
-            <DriverDetailsTable request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
+            <DriverDetailsTable driver={driver} data={data} request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
         )
-        // return data
     }
+
     const SideTable = () => {
         return (
-            <GrantedTable request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
+            <GrantedTable setDriver={setDriver} setData={setData} request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
         )
     }
 
@@ -98,9 +91,10 @@ const DriverTable = (props) => {
                         <SideTable />
                     </div>
                 </div>
+
                 <div className="d-flex">
                     <div className="btngroup-table mb-4 driver-details-map-table">
-                        <DriverDetailsBtnGroup />
+                        <DriverDetailsBtnGroup driver={driver} />
                         <div className="driver-details-table d-flex align-items-center mt-1">
                             <Switch>
                                 <Route path="/driverdetails/driver" component={DetailTable} />
@@ -109,8 +103,8 @@ const DriverTable = (props) => {
                             </Switch>
                         </div>
                     </div>
-                    <div style={{ marginTop: "58px", marginRight: "100px" }}>
-                        {/* <HospitalDetails /> */}
+                    <div style={{ marginTop: "58px", marginRight: "50px" }}>
+                        <HospitalDetails data={data} />
                     </div>
                 </div>
             </div>

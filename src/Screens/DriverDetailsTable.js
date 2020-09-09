@@ -1,51 +1,30 @@
 import React from 'react'
-import { Request } from "./ContactDetails";
 
 
-const arr=[]
-export const DriverDetails = (driver,hospital) => {
-    
-  let items = {
-    "driver": driver,
-    "hospital": hospital,
-  }
+export const DriverDetails = ({ driver }) => {
 
-  arr.push(items)
-  const table=arr.map((props)=>{
-    console.log(props);
-    
-      
-    return (
-      <div>
-        <div className="details d-flex flex-column align-items-start">
-          <h4 className="text-info">Driver Details</h4>
-          <h5>{props.driver.Drivername}</h5>
-          <p>{props.hospital.hospitalAddress}</p>
-          <div className="container p-0 d-flex">
-            <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
-              <p className="text-bold">Address :</p>
-              <p className="text-bold">Contact :</p>
-            </div>
-            <div className="hospital-details col-8 text-start col-md-8 col-sm" >
-              <p>{props.driver.driverContact}</p>
-              <p>{props.hospital.hospitalAddress}</p>
-            </div>
+  return (
+    <div className="my-2">
+      <div className="details d-flex flex-column align-items-start">
+        <h4 className="text-info">Driver Details</h4>
+        <div className="container p-0 d-flex">
+          <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
+            <p className="text-bold">Name :</p>
+            <p className="text-bold">Contact :</p>
+          </div>
+          <div className="hospital-details col-8 text-start col-md-8 col-sm" >
+            <p>{driver.DriverName}</p>
+            <p>{driver.driverContact}</p>
           </div>
         </div>
       </div>
-    )
-
-  })
-  return table
+    </div>
+  )
 }
-
-
-
-
 
 const RenderRequestBody = (props) => {
   return (
-    <tr key={props.patient.id} role="button">
+    <tr key={props.patient.id} role="button" >
       <td>{props.patient.id}</td>
       <td>{props.patient.time}</td>
       <td>{props.patient.requestTime}</td>
@@ -57,7 +36,7 @@ const RenderRequestBody = (props) => {
       <td className="opration">
         <button
           style={{ borderRadius: '0' }}
-            onClick={()=>DriverDetails(props.driver,props.hospital)}
+
           className="btn btn-grant">
           {' '}
           Grant
@@ -68,11 +47,11 @@ const RenderRequestBody = (props) => {
 }
 
 export const DriverDetailsTable = (props) => {
-  console.log("table driver", props);
+
   const table = props.patients.map((pat) => {
     const drive = props.drivers.map((drive) => {
       const hospital = props.hospitals.map((hos) => {
-        if ((pat.driverId === drive.id) && (drive.hospitalId === hos.id)) {
+        if ((pat.driverId === drive.id) && (drive.hospitalId === hos.id) && (props.driver === null || props.data.driver.id === drive.id)) {
           return <RenderRequestBody patient={pat} driver={drive} hospital={hos} />
         }
       })
@@ -107,20 +86,20 @@ export const DriverDetailsTable = (props) => {
 const RenderGrantedBody = (props) => {
 
   return (
-    <tr key={props.driver.id}>
+    <tr key={props.driver.id} role="button" onClick={() => { props.setDriver(props.driver); props.setData({ driver: props.driver, hospital: props.hospital }) }}>
       <td>{props.driver.DriverName}</td>
       <td style={{ textAlign: "end" }}>{props.hospital.hospitalName}</td>
     </tr>
   )
 }
 
-
 export const GrantedTable = (props) => {
+
   const table = props.patients.map((pat) => {
     const drive = props.drivers.map((drive) => {
       const hospital = props.hospitals.map((hos) => {
         if ((pat.driverId === drive.id) && (drive.hospitalId === hos.id)) {
-          return <RenderGrantedBody patient={pat} driver={drive} hospital={hos} />
+          return <RenderGrantedBody patient={pat} driver={drive} hospital={hos} setDriver={props.setDriver} setData={props.setData} />
         }
       })
       return hospital

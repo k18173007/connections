@@ -1,125 +1,82 @@
 import React from 'react'
-import { Save, Granted, Rejected ,items} from "./ContactDetails";
-import  {Link} from 'react-router-dom'
+import { Save, Granted, Rejected, items } from "./ContactDetails";
 
-export const SideDetails = (props,onClick) => {
-  console.log(props,onClick);
-  
-  if (props===null) {
-      return (<>
-      </>)
-  } else { 
-      return (
-          <div >
-              <div className="details d-flex flex-column align-items-start my-2">
-                  <div>
-                      <h4 className="text-info">Driver Details</h4>
-                  </div>
-                  <div className="details d-flex flex-column align-items-start">
-                      <h5>Krishna Kumar</h5>
-                      <p>Banaras Hindu University, Varanasi, UP</p>
-                      <div className="container p-0 d-flex">
-                          <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
-                              <p className="text-bold">Address :</p>
-                              <p className="text-bold">Contact :</p>
-                          </div>
-                          <div className="hospital-details col-8 text-start col-md-8 col-sm" >
-                              <p>8534066300</p>
-                              <p>Banaras Hindu University, Varanasi, UP-221005</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div className="details d-flex flex-column align-items-start my-2">
-                  <div>
-                      <h4 className="text-info">Hospiital Details</h4>
-                  </div>
-                  <div className="details d-flex flex-column align-items-start">
-                      <h5>Trola Center</h5>
-                      <p>Banaras Hindu University, Varanasi, UP</p>
-                      <div className="container p-0 d-flex">
-                          <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
-                              <p className="text-bold">Address :</p>
-                              <p className="text-bold">Contact :</p>
-                          </div>
-                          <div className="hospital-details col-8 text-start col-md-8 col-sm" >
-                              <p>8534066300</p>
-                              <p>Banaras Hindu University, Varanasi, UP-221005</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div style={{"marginTop":"66px"}}>
-              <div className="details d-flex flex-column align-items-start my-2">
-                  <div>
-                      <h3 className="text-info">Patient Details</h3>
-                  </div>
-                  <div className="details d-flex flex-column align-items-start">
-                      <h4>Trola Center</h4>
-                      <p>Banaras Hindu University, Varanasi, UP</p>
-                      <div className="container p-0 d-flex">
-                          <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
-                              <p className="text-bold">Age :</p>
-                              <p className="text-bold">Contact :</p>
-                              <p className="text-bold">Priority Level :</p>
-                              <p className="text-bold">Case :</p>
-                              <p className="text-bold">Details :</p>
-                              <p className="text-bold">Route :</p>
-                          </div>
-                          <div className="hospital-details col-8 text-start col-md-8 col-sm" >
-                              <p>45</p>
-                              <p>8534066300</p>
-                              <p className="text-bold text-danger">5</p>
-                              <p className="text-bold text-danger">Heartattack</p>
-                              <p>Banaras Hindu University, Varanasi, UP-221005</p>
-                              <p>Banaras Hindu University, Varanasi, UP-221005</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-      )
-  }
-}
+export const SideDetails = ({ data }) => {
 
-export const DriverDetails = (details) => {
-
-  items.push(details)
-  // let x= items.length-1
-  // let arr=[items[x]]
-  // console.log(arr);
-  const data=items.map((props)=>{
-      console.log(props);
-      
+  if (data === null) {
+    return (<>
+    </>)
+  } else {
     return (
-      <div>
-        <div className="details d-flex flex-column align-items-start">
-          <h4 className="text-info">Driver Details</h4>
-          <h5>{props.DriverName}</h5>
-          {/* <p>{props.hospital.hospitalName}</p> */}
-          <div className="container p-0 d-flex">
-            <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
-              <p className="text-bold">Contact :</p>
-              <p className="text-bold">Address :</p>
+      <div >
+        <div className="details d-flex flex-column align-items-start my-2">
+          <div>
+            <h4 className="text-info">Driver Details</h4>
+          </div>
+          <div className="details d-flex flex-column align-items-start">
+            <h5>{data.driver.DriverName}</h5>
+            <p>Banaras Hindu University, Varanasi, UP</p>
+            <div className="container p-0 d-flex">
+              <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
+                <p className="text-bold">Address :</p>
+                <p className="text-bold">Contact :</p>
+              </div>
+              <div className="hospital-details col-8 text-start col-md-8 col-sm" >
+                <p>Banaras Hindu University, Varanasi, UP-221005</p>
+                <p>{data.driver.driverContact}</p>
+              </div>
             </div>
-            <div className="hospital-details col-8 text-start col-md-8 col-sm" >
-              <p>{props.driverContact}</p>
-              <p>Banaras Hindu University, Varanasi, UP-221005</p>
+          </div>
+        </div>
+        <div className="details d-flex flex-column align-items-start my-2">
+          <div>
+            <h4 className="text-info">Hospiital Details</h4>
+          </div>
+          <div className="details d-flex flex-column align-items-start">
+            <h5>{data.hospital.hospitalName}</h5>
+            <div className="container p-0 d-flex">
+              <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
+                <p className="text-bold">Address :</p>
+                <p className="text-bold">Contact :</p>
+              </div>
+              <div className="hospital-details col-8 text-start col-md-8 col-sm" >
+                <p>{data.hospital.hospitalAddress}</p>
+                <p>{data.hospital.contact}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style={{ "marginTop": "66px" }}>
+          <div className="details d-flex flex-column align-items-start my-2">
+            <div>
+              <h3 className="text-info">Patient Details</h3>
+            </div>
+            <div className="details d-flex flex-column align-items-start">
+              <div className="container p-0 d-flex">
+                <div className="hospital-details col-4 p-0 text-start col-md-4 col-sm">
+                  <p className="text-bold">Age :</p>
+                  <p className="text-bold">Contact :</p>
+                  <p className="text-bold">Priority Level :</p>
+                  <p className="text-bold">Case :</p>
+                  <p className="text-bold">Details :</p>
+                  <p className="text-bold">Route :</p>
+                </div>
+                <div className="hospital-details col-8 text-start col-md-8 col-sm" >
+                  <p>{data.patient.patientAge}</p>
+                  <p>{data.patient.guardianMobileNo}</p>
+                  <p className="text-bold text-danger">{data.patient.plevel}</p>
+                  <p className="text-bold text-danger">{data.patient.case}</p>
+                  <p>Banaras Hindu University, Varanasi, UP-221005</p>
+                  <p>Banaras Hindu University, Varanasi, UP-221005</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     )
-
-  })
-  items.pop()
-  return data
-
-
-
+  }
 }
-
 
 
 const SaveData = (patient, driver, hospital, props) => {
@@ -130,9 +87,7 @@ const SaveData = (patient, driver, hospital, props) => {
     "props": props
   }
   Save.push(items)
-
   let data = Save.map((props) => {
-    console.log(props);
 
     return (
       <tr key={props.patient.id}>
@@ -160,8 +115,6 @@ const GrantedData = (patient, driver, hospital, props) => {
   Granted.push(items)
 
   let data = Granted.map((props) => {
-    console.log(props);
-
     return (
       <tr key={props.patient.id}>
         <td>{props.patient.id}</td>
@@ -188,8 +141,6 @@ const RejectedData = (patient, driver, hospital, props) => {
   Rejected.push(items)
 
   let data = Rejected.map((props) => {
-    console.log(props);
-
     return (
       <tr key={props.patient.id}>
         <td>{props.patient.id}</td>
@@ -209,8 +160,8 @@ const RejectedData = (patient, driver, hospital, props) => {
 
 const RenderRequestBody = (props) => {
   return (
-    
-    <tr key={props.patient.id} role="button" onClick={() => SideDetails(props.driver,props.onClick)}>
+
+    <tr key={props.patient.id} role="button" onClick={() => props.setDriverData({ driver: props.driver, patient: props.patient, hospital: props.hospital })}>
       <td>{props.patient.id}</td>
       <td>{props.patient.time}</td>
       <td>{props.patient.requestTime}</td>
@@ -220,14 +171,14 @@ const RenderRequestBody = (props) => {
       <td>{props.patient.case}</td>
       <td>{props.patient.plevel}</td>
       <td className="d-flex align-items-center">
-      <div className="radio">
-        <input type="radio" value="option1" name="myRadio" id={props.patient.patientName} className="radio__input radio1"/>
-        <label for={props.patient.patientName} className="radio__label">a</label>
-        <input type="radio" value="option2" name="myRadio" id={props.driver.DriverName} className="radio__input radio2"/>
-        <label for={props.driver.DriverName} className="radio__label">b</label>
-        <input type="radio" value="option3" name="myRadio" id={props.patient.id} className="radio__input radio3"/>
-        <label for={props.patient.id} className="radio__label">c</label>
-      </div>
+        <div className="radio">
+          <input type="radio" value="option1" name="myRadio" id={props.patient.patientName} className="radio__input radio1" />
+          <label for={props.patient.patientName} className="radio__label">a</label>
+          <input type="radio" value="option2" name="myRadio" id={props.driver.DriverName} className="radio__input radio2" />
+          <label for={props.driver.DriverName} className="radio__label">b</label>
+          <input type="radio" value="option3" name="myRadio" id={props.patient.id} className="radio__input radio3" />
+          <label for={props.patient.id} className="radio__label">c</label>
+        </div>
       </td>
       <td className="opration">
         <button
@@ -262,13 +213,13 @@ const RenderRequestBody = (props) => {
 }
 
 export const Table = (props) => {
-  console.log("pat1",props);
+  console.log("pat1", props);
 
   const table = props.patients.map((pat) => {
     const drive = props.drivers.map((drive) => {
       const hospital = props.hospitals.map((hos) => {
         if ((pat.driverId === drive.id) && (drive.hospitalId === hos.id)) {
-          return <RenderRequestBody patient={pat} driver={drive} hospital={hos} />
+          return <RenderRequestBody patient={pat} driver={drive} hospital={hos} setDriverData={props.setDriverData} />
         }
       })
       return hospital
@@ -278,7 +229,7 @@ export const Table = (props) => {
 
   return (
     <>
-      <table  className="table table-striped">
+      <table className="table table-striped">
         <thead style={{ background: '#12565d', color: 'aliceblue' }}>
           <tr>
             <th>id</th>
@@ -350,7 +301,7 @@ export const SaveTable = () => {
   )
 }
 
-export const GrantedTable = (props) => {
+export const GrantedTable = () => {
   return (
     <>
       <table style={{ height: '40vh' }} className="table table-striped">

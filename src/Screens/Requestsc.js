@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
 import { BtnGroup } from './RadioBtn'
-import { Table, RejectTable, SaveTable, GrantedTable,SideDetails } from './Table'
+import { Table, RejectTable, SaveTable, GrantedTable, SideDetails } from './Table'
 import { connect } from 'react-redux';
 import map from "../assests/maps.jpg";
 import "../css/Header.css";
-// import {  } from "./Details";
 
 const mapStateToProps = state => {
   return {
@@ -45,13 +44,11 @@ function Foot() {
 }
 
 
-
 const MainTable = (props) => {
+  const [sideTableData, setSideTableData] = useState(null);
   const requestTable = () => {
-
-    // console.log("pat",props.patients);
     return (
-      <Table request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
+      <Table setDriverData={setSideTableData} request={props.request} patients={props.patients} hospitals={props.hospitals} drivers={props.drivers} />
     )
   }
 
@@ -78,7 +75,7 @@ const MainTable = (props) => {
           </div>
         </div>
         <div className="py-2">
-          <SideDetails />
+          <SideDetails data={sideTableData} />
         </div>
       </div>
       <Foot />

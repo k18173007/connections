@@ -20,7 +20,6 @@ const MainComponent = () => {
             }}
           >
       <Header title="homeNav" link="home" brand="hombr" btn="1"></Header>
-
             <Switch>
               <Route path="/Signin" component={Signin} />
               <Route path="/Signup" component={Signup} />
